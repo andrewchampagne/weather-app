@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App In Kelvin</title>
+    <link rel="stylesheet" href="style.css" class="stylesheet">
+    <link rel="icon" href="images/clear.png">
+    
+</head>
+<body>
+    <p class = "Sophia">I LOVE MY GIRLFRIEND SOPHIA LUO</p>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="Enter City Name" spellcheck="false">
+            <button><img src="images/search.png"></button>
+        </div>
+        <div class="error">
+            <p>
+                Invalid city name. Please try again.
+            </p>
+        </div>
+        <div class="weather">
+            <img src="images/rain.png" class = "weather-icon">
+            <h1 class="temp">295°K</h1>
+            <h2 class="celtemp">22</h2>
+            <h3 class="city">Boston</h3>
+            <div class="details">
+                <div class="collumn">
+                    <img src="images/humidity.png" >
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="collumn">
+                    <img src="images/wind.png" >
+                    <div>
+                        <p class="wind">15 km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="suntime">
+        <div class="container">
+            <div class="sunCol">
+                <img src="images/sunrise.png" >
+                <div>
+                    <p class="sunriseTime"></p>
+                    <p>Sunrise</p>
+                </div>
+                
+            </div>
+            <div class="sunCol">
+                <img src="images/sunset.png" >
+                <div>
+                    <p class="sunsetTime"></p>
+                    <p>Sunset</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = "c35c1578310f494bad1f074c26db0cdd";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+        const weatherIcon = document.querySelector(".weather-icon")
+        const searchBox = document.querySelector(".search input");
+        const searchButton = document.querySelector(".search button");
+        
+
+        async function findWeather(city){
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+
+
+            if(response.status == 404){
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+            }else{
+                var data = await response.json();
+                var temperature = data.main.temp;
+
+                let sunriseUnix = data.sys.sunrise;
+                let sunsetUnix = data.sys.sunset;
+                let sunriseTime = (new Date(sunriseUnix * 1000)).toString();
+                let sunsetTime = (new Date(sunsetUnix * 1000)).toString();
+                const sunriseHours = sunriseTime.slice(0, -32);
+                const sunsetHours = sunsetTime.slice(0, -32);
+                const sr = sunriseHours.slice(-9);
+                const ss = sunsetHours.slice(-9);
+                
+                
+                
+                console.log(data);
+                
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(temperature + 273) + "°K";
+                document.querySelector(".celtemp").innerHTML = Math.round(temperature) + "°c";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " Km/h";
+                
+                document.querySelector(".sunriseTime").innerHTML = sr + " ET";
+                document.querySelector(".sunsetTime").innerHTML = ss + " ET";
+                console.log(sunriseTime);
+
+                if(data.weather[0].main == "Clouds"){
+                    weatherIcon.src = "images/clouds.png";
+                    if(temperature > 21){
+                        document.querySelector("body").style.background = "#FC8056";
+                        document.querySelector(".card").style.background = "linear-gradient(180deg, #F26452, #F2BC52)";
+                        document.querySelector(".suntime").style.background = "linear-gradient(180deg, #F26452, #F2BC52)";
+                    
+
+                    }
+                    else{
+                        document.querySelector("body").style.background = "#77A5FC";
+                        document.querySelector(".card").style.background = "linear-gradient(180deg, #9077FC, #a0dbff)";
+                        document.querySelector(".suntime").style.background = "linear-gradient(180deg, #9077FC, #a0dbff)";
+                }
+                }
+                else if(data.weather[0].main == "Clear"){
+                    weatherIcon.src = "images/clear.png";
+                    if(temperature > 21){
+                        document.querySelector("body").style.background = "#FC8056";
+                        document.querySelector(".card").style.background = "linear-gradient(180deg, #F26452, #F2BC52)";
+                        document.querySelector(".suntime").style.background = "linear-gradient(180deg, #F26452, #F2BC52)";
+                    
+
+                    }
+                    else{
+                        document.querySelector("body").style.background = "#77A5FC";
+                        document.querySelector(".card").style.background = "linear-gradient(180deg, #9077FC, #a0dbff)";
+                        document.querySelector(".suntime").style.background = "linear-gradient(180deg, #9077FC, #a0dbff)";
+                    }
+                }
+                else if(data.weather[0].main == "Snow"){
+                    weatherIcon.src = "images/snow.png";
+                    document.querySelector("body").style.background = "#BFCEE8";
+                    document.querySelector(".card").style.background = "linear-gradient(180deg, #C6BCF5, #C4E9FF)";
+                    document.querySelector(".suntime").style.background = "linear-gradient(180deg, #C6BCF5, #C4E9FF)";
+                }
+                else if(data.weather[0].main == "Rain"){
+                    weatherIcon.src = "images/rain.png";
+                    document.querySelector("body").style.background = "#68758F";
+                    document.querySelector(".card").style.background = "linear-gradient(180deg, #7174A6, #84A9C2)";
+                    document.querySelector(".suntime").style.background = "linear-gradient(180deg, #7174A6, #84A9C2)";
+                }
+                else if(data.weather[0].main == "Drizzle"){
+                    weatherIcon.src = "images/drizzle.png";
+                    document.querySelector("body").style.background = "#68758F";
+                    document.querySelector(".card").style.background = "linear-gradient(180deg, #7174A6, #7190A6)";
+                    document.querySelector(".suntime").style.background = "linear-gradient(180deg, #7174A6, #7190A6)";
+                }
+                else if(data.weather[0].main == "Mist"){
+                    weatherIcon.src = "images/mist.png";
+                    document.querySelector("body").style.background = "#68758F";
+                    document.querySelector(".card").style.background = "linear-gradient(180deg, #7174A6, #7190A6)";
+                    document.querySelector(".suntime").style.background = "linear-gradient(180deg, #7174A6, #7190A6)";
+
+                }
+              
+                document.querySelector(".weather").style.display = "block";
+                document.querySelector(".error").style.display = "none";
+                document.querySelector(".suntime").style.display = "block";
+            }
+            
+        }
+        searchButton.addEventListener('click', ()=>{
+            findWeather(searchBox.value); //take the city name inputed
+        })
+
+        
+    </script>
+
+</body>
+</html>

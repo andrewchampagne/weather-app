@@ -1,0 +1,158 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: #77A5FC;
+
+}
+
+.card{
+    width: 80%;
+    max-width: 470px;
+    background: linear-gradient(180deg, #9077FC, #a0dbff);
+    color: #ffffff;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 40px 35px;
+    text-align: center;
+    box-shadow: #161616 3px 12px 10px;
+}
+.search{
+    
+    size: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.search input{
+    border: 1px;
+    border-style:solid;
+    border-color: #26294b;
+    outline: 0;
+    color: black;
+    background: #ffffff;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 50px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 17px;
+    
+
+}
+.search button{
+    border: 1px;
+    outline: 2px;
+    background: #ffffff;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-color: #26294b;
+    border-style: solid;
+}
+.search img{
+    width: 25px;
+   
+}
+.weather-icon{
+    width: 160px; 
+    margin: 30px;
+}
+.weather h1{
+    font-size: 70px;
+    font-weight: 600;
+    margin-top: -10px;
+
+
+}
+.weather h2{
+    font-size: 25px;
+    font-weight: 300;
+    margin-top: 10px;
+
+}
+.weather h3{
+    
+    font-size: 45px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+.details{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 30px;
+    margin-top: 50px;
+
+}
+.collumn{
+    display:flex;
+    align-items: center;
+    text-align:left;
+
+}
+.collumn img{
+    width:40px;
+    margin-right: 10px;
+}
+
+.humidity, .wind{
+    font-size: 26px;
+    
+}
+.weather{
+    display:none;
+}
+.error{
+    text-align:left;
+    margin-left: 10px;
+    font-size: 15px;
+    margin-top:10px;
+    display:none;
+
+}
+.Sophia{
+    font-size: 20px;
+    text-align:center;
+    display: none;
+}
+.suntime {
+    width: 80%;
+    max-width: 470px;
+    background: linear-gradient(180deg, #9077FC, #a0dbff);
+    color: #ffffff;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 40px 35px;
+    text-align: center;
+    box-shadow: #161616 3px 12px 10px;
+    margin-top: 50px;
+    margin-bottom: 80px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+    display: none;
+}
+.sunCol img{
+    width:60px;
+    
+    
+    
+    
+}
+.sunriseTime, .sunsetTime{
+    font-size: 25px;
+    font-weight: 350px;
+   
+}
+.container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 50px
+}
